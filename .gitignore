@@ -1,0 +1,6 @@
+# service folders
+.idea
+.venv
+
+# envs
+*.env
