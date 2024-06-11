@@ -9,7 +9,7 @@ class Texts(EntityMeta):
     __tablename__ = 'texts'
 
     id = Column(BigInteger, primary_key=True, index=True, unique=True, nullable=False, autoincrement=True)
-    document_id = Column(Integer, ForeignKey('documents.id'), index=True, nullable=True)
+    document_id = Column(Integer, ForeignKey('documents.id'), index=True, nullable=False)
     text = Column(TEXT, nullable=True)
     type = Column(String, nullable=True)
     is_deleted = Column(BOOLEAN, nullable=True)
@@ -30,7 +30,7 @@ class Documents(EntityMeta):
     __tablename__ = 'documents'
 
     id = Column(Integer, primary_key=True, index=True, unique=True, nullable=False, autoincrement=True)
-    courses_id = Column(Integer, ForeignKey('courses.id'), index=True, nullable=True)
+    courses_id = Column(Integer, ForeignKey('courses.id'), index=True, nullable=False)
     type = Column(String, nullable=False)
     is_deleted = Column(BOOLEAN, nullable=True)
     updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now(), nullable=False)
