@@ -1,4 +1,4 @@
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 from pydantic import BaseModel
 
 
@@ -22,6 +22,14 @@ class DocumentBase(BaseModel):
 class CourseBase(BaseModel):
     name: str
     params: Dict
+
+    class Config:
+        orm_mode = True
+
+
+class CompetenceBase(BaseModel):
+    courses_id: int
+    competencies: List[str]
 
     class Config:
         orm_mode = True

@@ -26,3 +26,12 @@ class DocumentPayload(DocumentBase):
 class DocumentResponse(DocumentBase):
     id: int
     updated_at: str
+
+
+class CompetencePayload(CompetenceBase):
+    pass
+
+
+class CompetenceResponse(CompetenceBase):
+    id: int
+    updated_at: str

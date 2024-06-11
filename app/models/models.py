@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP, BigInteger, ForeignKey, BOOLEAN
+from sqlalchemy import Column, Integer, String, TIMESTAMP, BigInteger, ForeignKey, ARRAY
 from sqlalchemy.dialects.postgresql import JSONB, TEXT
 from sqlalchemy.sql import func
 
@@ -54,5 +54,22 @@ class Courses(EntityMeta):
             "id": self.id,
             "name": self.name.__str__(),
             "params": self.type,
+            "updated_at": self.updated_at.__str__(),
+        }
+
+
+class Competencies(EntityMeta):
+    __tablename__ = 'competencies'
+
+    id = Column(Integer, primary_key=True, index=True, unique=True, nullable=False, autoincrement=True)
+    courses_id = Column(Integer, ForeignKey('courses.id'), index=True, nullable=False)
+    competencies = Column(ARRAY(String), nullable=False)
+    updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    def normalize(self):
+        return {
+            "id": self.id,
+            "courses_id": self.courses_id,
+            "competencies": self.competencies,
             "updated_at": self.updated_at.__str__(),
         }
