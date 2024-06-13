@@ -4,4 +4,4 @@
 
 # envs
 *.env
-docker-compose.yml
+docker-compose-test.yml
