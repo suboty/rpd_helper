@@ -26,7 +26,7 @@ class TextsRepository:
     ) -> List[Texts]:
         res = await self.db.execute(select(Texts).order_by(desc(Texts.updated_at)).offset(start).limit(limit))
         logger.debug(f'Get Texts from <{start}> to <{limit}>')
-        return [dict(x)['Sources'].normalize() for x in res.mappings().all()]
+        return [dict(x)['Texts'].normalize() for x in res.mappings().all()]
 
     @decorator_rollback_error
     async def get(self, text: Texts) -> Texts:

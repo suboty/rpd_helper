@@ -5,7 +5,7 @@ from app.services.documents import DocumentsService
 
 
 DocumentsRouter = APIRouter(
-    prefix="/v0/documents", tags=["documents"]
+    prefix="/documents", tags=["documents"]
 )
 
 

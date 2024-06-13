@@ -5,7 +5,7 @@ from app.services.courses import CoursesService
 
 
 CoursesRouter = APIRouter(
-    prefix="/v0/courses", tags=["courses"]
+    prefix="/courses", tags=["courses"]
 )
 
 

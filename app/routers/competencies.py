@@ -5,7 +5,7 @@ from app.services.competencies import CompetenciesService
 
 
 CompetenciesRouter = APIRouter(
-    prefix="/v0/competencies", tags=["competencies"]
+    prefix="/competencies", tags=["competencies"]
 )
 
 
@@ -44,7 +44,7 @@ async def create(
     return await competencies_service.create(competence)
 
 
-@CompetenciesRouter.patch("/{competence_id}", response_model=CourseResponse)
+@CompetenciesRouter.patch("/{competence_id}", response_model=CompetenceResponse)
 async def update(
     competence_id: int,
     competence: CompetencePayload,

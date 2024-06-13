@@ -5,7 +5,7 @@ from app.services.texts import TextsService
 
 
 TextsRouter = APIRouter(
-    prefix="/v0/texts", tags=["texts"]
+    prefix="/texts", tags=["texts"]
 )
 
 

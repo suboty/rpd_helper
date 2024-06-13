@@ -42,7 +42,7 @@ class DocumentsRepository:
         self.db.add(document)
         await self.db.commit()
         await self.db.refresh(document)
-        logger.debug(f'Create Document with name <{document.name}>')
+        logger.debug(f'Create Document with type <{document.type}>')
         return document.normalize()
 
     @decorator_rollback_error

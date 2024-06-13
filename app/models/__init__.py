@@ -1,8 +1,16 @@
-from sqlalchemy.ext.declarative import declarative_base
+import os
+
+from sqlalchemy import MetaData
+from sqlalchemy.orm import DeclarativeBase
 
 from app.settings import settings
 
-EntityMeta = declarative_base()
+metadata_obj = MetaData(schema=os.environ.get('DATABASE_SCHEMA'))
+
+
+class EntityMeta(DeclarativeBase):
+    metadata = metadata_obj
+    schema = os.environ.get('DATABASE_SCHEMA')
 
 
 async def init():

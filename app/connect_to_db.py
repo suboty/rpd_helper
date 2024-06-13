@@ -7,6 +7,7 @@ from typing import Dict, Optional
 from dotenv import dotenv_values
 from pydantic import error_wrappers, BaseSettings
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_scoped_session
+from sqlalchemy.pool import NullPool
 from sqlalchemy.orm import sessionmaker
 
 from app.logger import logger
@@ -71,8 +72,7 @@ async def connect_to_database(env):
             DATABASE_URL,
             echo=env.DEBUG_MODE,
             pool_pre_ping=True,
-            pool_size=20,
-            max_overflow=0
+            poolclass=NullPool,
         )
 
         SessionLocal = async_scoped_session(
@@ -81,6 +81,8 @@ async def connect_to_database(env):
 
         connection = await SessionLocal.connection()
         await connection.execution_options(schema_translate_map={None: env.DATABASE_SCHEMA})
+
+        Engine = Engine.execution_options(schema_translate_map={None: env.DATABASE_SCHEMA})
 
         return Engine, SessionLocal
 

@@ -26,7 +26,7 @@ class CoursesRepository:
     ) -> List[Courses]:
         res = await self.db.execute(select(Courses).order_by(desc(Courses.updated_at)).offset(start).limit(limit))
         logger.debug(f'Get Courses from <{start}> to <{limit}>')
-        return [dict(x)['Sources'].normalize() for x in res.mappings().all()]
+        return [dict(x)['Courses'].normalize() for x in res.mappings().all()]
 
     @decorator_rollback_error
     async def get(self, course: Courses) -> Courses:
