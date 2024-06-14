@@ -11,6 +11,7 @@ from app.routers.texts import TextsRouter
 from app.routers.documents import DocumentsRouter
 from app.routers.courses import CoursesRouter
 from app.routers.competencies import CompetenciesRouter
+from app.routers.interface import InterfaceRouter
 
 
 app = FastAPI(
@@ -33,6 +34,10 @@ app = FastAPI(
             "name": "competencies",
             "description": "Contains CRUD methods for Competencies entity",
         },
+        {
+            "name": "interface",
+            "description": "Contains project interfaces methods",
+        },
     ],
 )
 
@@ -40,6 +45,7 @@ app.include_router(TextsRouter)
 app.include_router(DocumentsRouter)
 app.include_router(CoursesRouter)
 app.include_router(CompetenciesRouter)
+app.include_router(InterfaceRouter)
 
 
 async def init_app():

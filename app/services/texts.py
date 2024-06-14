@@ -19,6 +19,7 @@ class TextsService:
         return await self.texts_repository.create(
             Texts(
                 document_id=text_body.document_id,
+                competencies_id=text_body.competencies_id,
                 text=text_body.text,
                 type=text_body.type,
             )
@@ -50,6 +51,7 @@ class TextsService:
         return await self.texts_repository.update(
             text_id, Texts(
                 document_id=text_body.document_id,
+                competencies_id=text_body.competencies_id,
                 text=text_body.text,
                 type=text_body.type,
             )

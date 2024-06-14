@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 class TextBase(BaseModel):
     document_id: int
+    competencies_id: int
     text: Optional[str]
     type: Optional[str]
 
@@ -29,6 +30,7 @@ class CourseBase(BaseModel):
 
 class CompetenceBase(BaseModel):
     courses_id: int
+    type: str
     competencies: List[str]
 
     class Config:

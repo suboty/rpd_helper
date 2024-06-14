@@ -44,7 +44,7 @@ class CompetenciesRepository:
         self.db.add(competence)
         await self.db.commit()
         await self.db.refresh(competence)
-        logger.debug(f'Create Competence with competencies <{competence.competencies}>')
+        logger.debug(f'Create Competence with type <{competence.type}>')
         return competence.normalize()
 
     @decorator_rollback_error

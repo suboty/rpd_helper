@@ -19,6 +19,7 @@ class CompetenciesService:
         return await self.competencies_repository.create(
             Competencies(
                 courses_id=competence_body.courses_id,
+                type=competence_body.type,
                 competencies=competence_body.competencies,
             )
         )
@@ -49,6 +50,7 @@ class CompetenciesService:
         return await self.competencies_repository.update(
             competence_id, Competencies(
                 courses_id=competence_body.courses_id,
+                type=competence_body.type,
                 competencies=competence_body.competencies,
             )
         )

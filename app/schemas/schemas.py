@@ -35,3 +35,8 @@ class CompetencePayload(CompetenceBase):
 class CompetenceResponse(CompetenceBase):
     id: int
     updated_at: str
+
+
+class InterfaceAFResponse(BaseModel):
+    status: bool
+    message: str
