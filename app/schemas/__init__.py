@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 class TextBase(BaseModel):
     document_id: int
-    competencies_id: int
+    competencies_id: Optional[int]
     text: Optional[str]
     type: Optional[str]
 

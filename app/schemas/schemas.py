@@ -40,3 +40,7 @@ class CompetenceResponse(CompetenceBase):
 class InterfaceAFResponse(BaseModel):
     status: bool
     message: str
+
+
+class InterfaceLectureResponse(InterfaceAFResponse):
+    ...

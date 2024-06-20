@@ -13,7 +13,8 @@ class Texts(EntityMeta):
 
     id = Column(BigInteger, primary_key=True, index=True, unique=True, nullable=False, autoincrement=True)
     document_id = Column(Integer, ForeignKey(f'{os.environ.get("DATABASE_SCHEMA")}.documents.id'), index=True, nullable=False)
-    competencies_id = Column(Integer, ForeignKey(f'{os.environ.get("DATABASE_SCHEMA")}.competencies.id'), index=True, nullable=False)
+    competencies_id = Column(Integer, ForeignKey(f'{os.environ.get("DATABASE_SCHEMA")}.competencies.id'), index=True,
+                             nullable=True)
     text = Column(TEXT, nullable=True)
     type = Column(String, nullable=True)
     updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now(), nullable=False)
