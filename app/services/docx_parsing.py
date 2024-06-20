@@ -10,17 +10,20 @@ from app.schemas.schemas import *
 
 class DOCXParsingService:
     excluded_paragraphs = [
-        ''
+        '',
     ]
 
     excluded_paragraphs_re = [
-        regex.compile(r'Время, отводимое на выполнение задания')
+        regex.compile(r'Время, отводимое на выполнение задания'),
+        regex.compile(r'Правильный ответ'),
+        regex.compile(r'Время выполнения')
     ]
 
     competencies_re = {
         'Знать': regex.compile(r'УК\s?-\d.*Знать\s?-'),
         'Уметь': regex.compile(r'УК\s?-\d.*Уметь\s?-'),
         'Владеть': regex.compile(r'УК\s?-\d.*Владеть\s?-'),
+        'ОПК': regex.compile(r'ОПК\s?-'),
     }
 
     def __init__(
@@ -38,7 +41,6 @@ class DOCXParsingService:
         self.documents_service = documents_service
 
     def filter_paragraph(self, paragraph):
-
         if paragraph in self.excluded_paragraphs:
             return False
         for re in self.excluded_paragraphs_re:
@@ -82,8 +84,10 @@ class DOCXParsingService:
 
         for paragraph in self.current_paragraphs:
             if self.filter_paragraph(paragraph):
+                _is_find = False
                 for re_key in self.competencies_re.keys():
                     if self.competencies_re[re_key].findall(paragraph):
+                        _is_find = True
                         comp_res = await self.competencies_service.create(
                             CompetencePayload(
                                 courses_id=1,
@@ -95,6 +99,9 @@ class DOCXParsingService:
                         )
                         competencies_counter += 1
                         _current_comp_id = comp_res['id']
+                        continue
+                if _is_find:
+                    continue
                 if _current_comp_id:
                     await self.texts_service.create(
                         TextPayload(
